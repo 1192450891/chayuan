@@ -1,0 +1,354 @@
+[
+  {
+    "district": "慈溪市",
+    "crop": 21213
+  },
+  {
+    "district": "余姚市",
+    "crop": 10561
+  },
+  {
+    "district": "海曙区",
+    "crop": 5191
+  },
+  {
+    "district": "奉化区",
+    "crop": 45652
+  },
+  {
+    "district": "北仑区",
+    "crop": 62421
+  },
+  {
+    "district": "江北区",
+    "crop": 11471
+  },
+  {
+    "district": "镇海区",
+    "crop": 13769
+  },
+  {
+    "district": "象山县",
+    "crop": 587471
+  },
+  {
+    "district": "宁海县",
+    "crop": 361105
+  },
+  {
+    "district": "鄞州区",
+    "crop": 113650
+  },
+  {
+    "district": "黄岩区",
+    "crop": 219476
+  },
+  {
+    "district": "椒江区",
+    "crop": 86275
+  },
+  {
+    "district": "路桥区",
+    "crop": 13182
+  },
+  {
+    "district": "仙居县",
+    "crop": 13945
+  },
+  {
+    "district": "玉环市",
+    "crop": 47110
+  },
+  {
+    "district": "临海市",
+    "crop": 926198
+  },
+  {
+    "district": "天台县",
+    "crop": 79533
+  },
+  {
+    "district": "三门县",
+    "crop": 263313
+  },
+  {
+    "district": "温岭市",
+    "crop": 39941
+  },
+  {
+    "district": "南湖区",
+    "crop": ""
+  },
+  {
+    "district": "嘉善县",
+    "crop": ""
+  },
+  {
+    "district": "海宁市",
+    "crop": ""
+  },
+  {
+    "district": "平湖市",
+    "crop": ""
+  },
+  {
+    "district": "桐乡市",
+    "crop": ""
+  },
+  {
+    "district": "秀洲区",
+    "crop": ""
+  },
+  {
+    "district": "海盐县",
+    "crop": ""
+  },
+  {
+    "district": "嵊泗县",
+    "crop": ""
+  },
+  {
+    "district": "岱山县",
+    "crop": ""
+  },
+  {
+    "district": "普陀区",
+    "crop": ""
+  },
+  {
+    "district": "定海区",
+    "crop": ""
+  },
+  {
+    "district": "洞头区",
+    "crop": 7245
+  },
+  {
+    "district": "瓯海区",
+    "crop": 117234
+  },
+  {
+    "district": "龙湾区",
+    "crop": 22251
+  },
+  {
+    "district": "鹿城区",
+    "crop": 18627
+  },
+  {
+    "district": "乐清市",
+    "crop": 37374
+  },
+  {
+    "district": "瑞安市",
+    "crop": 54404
+  },
+  {
+    "district": "泰顺县",
+    "crop": 2533
+  },
+  {
+    "district": "文成县",
+    "crop": 3347
+  },
+  {
+    "district": "永嘉县",
+    "crop": 92970
+  },
+  {
+    "district": "苍南县",
+    "crop": 93804
+  },
+  {
+    "district": "平阳县",
+    "crop": 38561
+  },
+  {
+    "district": "柯城区",
+    "crop": 1145985
+  },
+  {
+    "district": "衢江区",
+    "crop": 729223
+  },
+  {
+    "district": "常山县",
+    "crop": 106972
+  },
+  {
+    "district": "江山市",
+    "crop": 713671
+  },
+  {
+    "district": "开化县",
+    "crop": 20624
+  },
+  {
+    "district": "龙游县",
+    "crop": 362310
+  },
+  {
+    "district": "金华市区",
+    "crop": 160532
+  },
+  {
+    "district": "东阳市",
+    "crop": 68119
+  },
+  {
+    "district": "义乌市",
+    "crop": 61097
+  },
+  {
+    "district": "武义县",
+    "crop": 31596
+  },
+  {
+    "district": "浦江县",
+    "crop": 7397
+  },
+  {
+    "district": "兰溪市",
+    "crop": 73952
+  },
+  {
+    "district": "磐安县",
+    "crop": 269
+  },
+  {
+    "district": "永康市",
+    "crop": 38366
+  },
+  {
+    "district": "松阳县",
+    "crop": 113883
+  },
+  {
+    "district": "云和县",
+    "crop": 3593
+  },
+  {
+    "district": "庆元县",
+    "crop": 42003
+  },
+  {
+    "district": "景宁畲族自治县",
+    "crop": 16454
+  },
+  {
+    "district": "青田县",
+    "crop": 181745
+  },
+  {
+    "district": "缙云县",
+    "crop": 16155
+  },
+  {
+    "district": "遂昌县",
+    "crop": 4836
+  },
+  {
+    "district": "龙泉市",
+    "crop": 10043
+  },
+  {
+    "district": "莲都区",
+    "crop": 365776
+  },
+  {
+    "district": "下城区",
+    "crop": ""
+  },
+  {
+    "district": "富阳区",
+    "crop": 13868
+  },
+  {
+    "district": "滨江区",
+    "crop": 37
+  },
+  {
+    "district": "建德市",
+    "crop": 549634
+  },
+  {
+    "district": "拱墅区",
+    "crop": ""
+  },
+  {
+    "district": "江干区",
+    "crop": ""
+  },
+  {
+    "district": "西湖区",
+    "crop": 684
+  },
+  {
+    "district": "临安区",
+    "crop": 1930
+  },
+  {
+    "district": "余杭区",
+    "crop": 3444
+  },
+  {
+    "district": "上城区",
+    "crop": ""
+  },
+  {
+    "district": "淳安县",
+    "crop": 315953
+  },
+  {
+    "district": "萧山区",
+    "crop": 2291
+  },
+  {
+    "district": "桐庐县",
+    "crop": 14364
+  },
+  {
+    "district": "新昌县",
+    "crop": ""
+  },
+  {
+    "district": "嵊州市",
+    "crop": ""
+  },
+  {
+    "district": "诸暨市",
+    "crop": ""
+  },
+  {
+    "district": "越城区",
+    "crop": ""
+  },
+  {
+    "district": "柯桥区",
+    "crop": ""
+  },
+  {
+    "district": "上虞区",
+    "crop": ""
+  },
+  {
+    "district": "安吉县",
+    "crop": 285
+  },
+  {
+    "district": "长兴县",
+    "crop": 2368
+  },
+  {
+    "district": "德清县",
+    "crop": 257
+  },
+  {
+    "district": "吴兴区",
+    "crop": 411
+  },
+  {
+    "district": "南浔区",
+    "crop": 239
+  }
+]

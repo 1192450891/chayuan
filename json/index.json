@@ -1,0 +1,882 @@
+[
+  {
+    "ID": 1,
+    "urban": "宁波市",
+    "district": "慈溪市",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 1.41
+  },
+  {
+    "ID": 2,
+    "urban": "宁波市",
+    "district": "余姚市",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 149.85
+  },
+  {
+    "ID": 3,
+    "urban": "宁波市",
+    "district": "海曙区",
+    "average_temp": 16.21,
+    "acc_temp": 5226.21,
+    "fre_temp": 0,
+    "humi": 73.47,
+    "mean": 169.24
+  },
+  {
+    "ID": 4,
+    "urban": "宁波市",
+    "district": "奉化区",
+    "average_temp": 16.48,
+    "acc_temp": 5323.56,
+    "fre_temp": 0,
+    "humi": 74.83,
+    "mean": 191.28
+  },
+  {
+    "ID": 5,
+    "urban": "宁波市",
+    "district": "北仑区",
+    "average_temp": 17.04,
+    "acc_temp": 5521.34,
+    "fre_temp": 0,
+    "humi": 76.98,
+    "mean": 60.43
+  },
+  {
+    "ID": 6,
+    "urban": "宁波市",
+    "district": "江北区",
+    "average_temp": 17.8,
+    "acc_temp": 5847.19,
+    "fre_temp": 0,
+    "humi": 72.91,
+    "mean": 26.87
+  },
+  {
+    "ID": 7,
+    "urban": "宁波市",
+    "district": "镇海区",
+    "average_temp": 17.69,
+    "acc_temp": 5793.84,
+    "fre_temp": 0,
+    "humi": 74.06,
+    "mean": 22.97
+  },
+  {
+    "ID": 8,
+    "urban": "宁波市",
+    "district": "象山县",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 68.19
+  },
+  {
+    "ID": 9,
+    "urban": "宁波市",
+    "district": "宁海县",
+    "average_temp": 17.09,
+    "acc_temp": 5543.7,
+    "fre_temp": 0,
+    "humi": 76.73,
+    "mean": 171.79
+  },
+  {
+    "ID": 10,
+    "urban": "宁波市",
+    "district": "鄞州区",
+    "average_temp": 17.36,
+    "acc_temp": 5654.98,
+    "fre_temp": 0,
+    "humi": 75.56,
+    "mean": 83.02
+  },
+  {
+    "ID": 12,
+    "urban": "台州市",
+    "district": "黄岩区",
+    "average_temp": 16.74,
+    "acc_temp": 5406.32,
+    "fre_temp": 0,
+    "humi": 78.07,
+    "mean": 254.83
+  },
+  {
+    "ID": 13,
+    "urban": "台州市",
+    "district": "椒江区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 25.21
+  },
+  {
+    "ID": 14,
+    "urban": "台州市",
+    "district": "路桥区",
+    "average_temp": 17.97,
+    "acc_temp": 5921.7,
+    "fre_temp": 0,
+    "humi": 79.61,
+    "mean": 18.49
+  },
+  {
+    "ID": 15,
+    "urban": "台州市",
+    "district": "仙居县",
+    "average_temp": 16.12,
+    "acc_temp": 5173.62,
+    "fre_temp": 0,
+    "humi": 74.94,
+    "mean": 415.87
+  },
+  {
+    "ID": 16,
+    "urban": "台州市",
+    "district": "玉环市",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 43.22
+  },
+  {
+    "ID": 17,
+    "urban": "台州市",
+    "district": "临海市",
+    "average_temp": 17.42,
+    "acc_temp": 5679.46,
+    "fre_temp": 0,
+    "humi": 76.68,
+    "mean": 198.69
+  },
+  {
+    "ID": 18,
+    "urban": "台州市",
+    "district": "天台县",
+    "average_temp": 15.84,
+    "acc_temp": 5073.41,
+    "fre_temp": 0,
+    "humi": 74.12,
+    "mean": 352.84
+  },
+  {
+    "ID": 19,
+    "urban": "台州市",
+    "district": "三门县",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 108.76
+  },
+  {
+    "ID": 20,
+    "urban": "台州市",
+    "district": "温岭市",
+    "average_temp": 18.08,
+    "acc_temp": 5977.21,
+    "fre_temp": 0,
+    "humi": 81.21,
+    "mean": 50.59
+  },
+  {
+    "ID": 22,
+    "urban": "嘉兴市",
+    "district": "南湖区",
+    "average_temp": 17.37,
+    "acc_temp": 5680.44,
+    "fre_temp": 0,
+    "humi": 72.35,
+    "mean": 8.24
+  },
+  {
+    "ID": 23,
+    "urban": "嘉兴市",
+    "district": "嘉善县",
+    "average_temp": 17.33,
+    "acc_temp": 5662.69,
+    "fre_temp": 0,
+    "humi": 72.67,
+    "mean": 7.57
+  },
+  {
+    "ID": 24,
+    "urban": "嘉兴市",
+    "district": "海宁市",
+    "average_temp": 17.69,
+    "acc_temp": 5809.44,
+    "fre_temp": 0,
+    "humi": 70.73,
+    "mean": 9.29
+  },
+  {
+    "ID": 25,
+    "urban": "嘉兴市",
+    "district": "平湖市",
+    "average_temp": 17.36,
+    "acc_temp": 5671.11,
+    "fre_temp": 0,
+    "humi": 72.76,
+    "mean": 8.67
+  },
+  {
+    "ID": 26,
+    "urban": "嘉兴市",
+    "district": "桐乡市",
+    "average_temp": 17.59,
+    "acc_temp": 5767.23,
+    "fre_temp": 0,
+    "humi": 70.78,
+    "mean": 8.05
+  },
+  {
+    "ID": 27,
+    "urban": "嘉兴市",
+    "district": "秀洲区",
+    "average_temp": 17.43,
+    "acc_temp": 5702.87,
+    "fre_temp": 0,
+    "humi": 71.79,
+    "mean": 8.64
+  },
+  {
+    "ID": 28,
+    "urban": "嘉兴市",
+    "district": "海盐县",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 6.13
+  },
+  {
+    "ID": 30,
+    "urban": "舟山市",
+    "district": "嵊泗县",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 20.48
+  },
+  {
+    "ID": 31,
+    "urban": "舟山市",
+    "district": "岱山县",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 29.99
+  },
+  {
+    "ID": 32,
+    "urban": "舟山市",
+    "district": "普陀区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 41.41
+  },
+  {
+    "ID": 33,
+    "urban": "舟山市",
+    "district": "定海区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 59.05
+  },
+  {
+    "ID": 35,
+    "urban": "温州市",
+    "district": "洞头区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 22.42
+  },
+  {
+    "ID": 36,
+    "urban": "温州市",
+    "district": "瓯海区",
+    "average_temp": 17.48,
+    "acc_temp": 5706.74,
+    "fre_temp": 0,
+    "humi": 75.42,
+    "mean": 237.89
+  },
+  {
+    "ID": 37,
+    "urban": "温州市",
+    "district": "龙湾区",
+    "average_temp": 18.82,
+    "acc_temp": 6395.06,
+    "fre_temp": 0,
+    "humi": 78,
+    "mean": 42.35
+  },
+  {
+    "ID": 38,
+    "urban": "温州市",
+    "district": "鹿城区",
+    "average_temp": 18.3,
+    "acc_temp": 6060.76,
+    "fre_temp": 0,
+    "humi": 76.52,
+    "mean": 135.99
+  },
+  {
+    "ID": 39,
+    "urban": "温州市",
+    "district": "乐清市",
+    "average_temp": 18.34,
+    "acc_temp": 6102.85999999999,
+    "fre_temp": 0,
+    "humi": 79.56,
+    "mean": 169.91
+  },
+  {
+    "ID": 40,
+    "urban": "温州市",
+    "district": "瑞安市",
+    "average_temp": 18.15,
+    "acc_temp": 6015.31,
+    "fre_temp": 0,
+    "humi": 74.82,
+    "mean": 216.75
+  },
+  {
+    "ID": 41,
+    "urban": "温州市",
+    "district": "泰顺县",
+    "average_temp": 15.77,
+    "acc_temp": 4992.57,
+    "fre_temp": 0,
+    "humi": 75.49,
+    "mean": 604.77
+  },
+  {
+    "ID": 42,
+    "urban": "温州市",
+    "district": "文成县",
+    "average_temp": 16.06,
+    "acc_temp": 5118.46,
+    "fre_temp": 0,
+    "humi": 74.1,
+    "mean": 559.07
+  },
+  {
+    "ID": 43,
+    "urban": "温州市",
+    "district": "永嘉县",
+    "average_temp": 16.6,
+    "acc_temp": 5341.51,
+    "fre_temp": 0,
+    "humi": 77.13,
+    "mean": 416.95
+  },
+  {
+    "ID": 44,
+    "urban": "温州市",
+    "district": "苍南县",
+    "average_temp": 18.38,
+    "acc_temp": 6190.37,
+    "fre_temp": 0,
+    "humi": 72.65,
+    "mean": 171.56
+  },
+  {
+    "ID": 45,
+    "urban": "温州市",
+    "district": "平阳县",
+    "average_temp": 18.43,
+    "acc_temp": 6182.60999999999,
+    "fre_temp": 0,
+    "humi": 73.14,
+    "mean": 216.98
+  },
+  {
+    "ID": 47,
+    "urban": "衢州市",
+    "district": "柯城区",
+    "average_temp": 17.67,
+    "acc_temp": 5798.47,
+    "fre_temp": 0,
+    "humi": 72.79,
+    "mean": 258.92
+  },
+  {
+    "ID": 48,
+    "urban": "衢州市",
+    "district": "衢江区",
+    "average_temp": 16.15,
+    "acc_temp": 5202.03,
+    "fre_temp": 0,
+    "humi": 72.33,
+    "mean": 354.8
+  },
+  {
+    "ID": 49,
+    "urban": "衢州市",
+    "district": "常山县",
+    "average_temp": 17.25,
+    "acc_temp": 5634.84,
+    "fre_temp": 0,
+    "humi": 73.16,
+    "mean": 268.89
+  },
+  {
+    "ID": 50,
+    "urban": "衢州市",
+    "district": "江山市",
+    "average_temp": 16.18,
+    "acc_temp": 5208.89,
+    "fre_temp": 0,
+    "humi": 73.66,
+    "mean": 399.09
+  },
+  {
+    "ID": 51,
+    "urban": "衢州市",
+    "district": "开化县",
+    "average_temp": 16.23,
+    "acc_temp": 5236.12,
+    "fre_temp": 0,
+    "humi": 72.44,
+    "mean": 383.21
+  },
+  {
+    "ID": 52,
+    "urban": "衢州市",
+    "district": "龙游县",
+    "average_temp": 16.76,
+    "acc_temp": 5442.61,
+    "fre_temp": 0,
+    "humi": 70.24,
+    "mean": 213.29
+  },
+  {
+    "ID": 54,
+    "urban": "金华市",
+    "district": "金华市区",
+    "average_temp": 17.1,
+    "acc_temp": 5581.23,
+    "fre_temp": 0,
+    "humi": 66.74,
+    "mean": 239.24
+  },
+  {
+    "ID": 55,
+    "urban": "金华市",
+    "district": "东阳市",
+    "average_temp": 16.64,
+    "acc_temp": 5393.69,
+    "fre_temp": 0,
+    "humi": 69.27,
+    "mean": 282.13
+  },
+  {
+    "ID": 56,
+    "urban": "金华市",
+    "district": "义乌市",
+    "average_temp": 17.46,
+    "acc_temp": 5713.08,
+    "fre_temp": 0,
+    "humi": 66.27,
+    "mean": 199.47
+  },
+  {
+    "ID": 57,
+    "urban": "金华市",
+    "district": "武义县",
+    "average_temp": 16.34,
+    "acc_temp": 5273.47,
+    "fre_temp": 0,
+    "humi": 66.73,
+    "mean": 390.1
+  },
+  {
+    "ID": 58,
+    "urban": "金华市",
+    "district": "浦江县",
+    "average_temp": 16.89,
+    "acc_temp": 5493.36,
+    "fre_temp": 0,
+    "humi": 65.29,
+    "mean": 299.1
+  },
+  {
+    "ID": 59,
+    "urban": "金华市",
+    "district": "兰溪市",
+    "average_temp": 17.42,
+    "acc_temp": 5700.29999999999,
+    "fre_temp": 0,
+    "humi": 66.59,
+    "mean": 160.64
+  },
+  {
+    "ID": 60,
+    "urban": "金华市",
+    "district": "磐安县",
+    "average_temp": 14.44,
+    "acc_temp": 4601.81,
+    "fre_temp": 0,
+    "humi": 72.39,
+    "mean": 569.77
+  },
+  {
+    "ID": 61,
+    "urban": "金华市",
+    "district": "永康市",
+    "average_temp": 17.48,
+    "acc_temp": 5724.3,
+    "fre_temp": 0,
+    "humi": 67.87,
+    "mean": 220.11
+  },
+  {
+    "ID": 63,
+    "urban": "丽水市",
+    "district": "松阳县",
+    "average_temp": 15.86,
+    "acc_temp": 5087.3,
+    "fre_temp": 0,
+    "humi": 70.48,
+    "mean": 542.06
+  },
+  {
+    "ID": 64,
+    "urban": "丽水市",
+    "district": "云和县",
+    "average_temp": 16.14,
+    "acc_temp": 5182.91,
+    "fre_temp": 0,
+    "humi": 73.38,
+    "mean": 562.41
+  },
+  {
+    "ID": 65,
+    "urban": "丽水市",
+    "district": "庆元县",
+    "average_temp": 14.87,
+    "acc_temp": 4662.38,
+    "fre_temp": 0,
+    "humi": 77.82,
+    "mean": 872.22
+  },
+  {
+    "ID": 66,
+    "urban": "丽水市",
+    "district": "景宁畲族自治县",
+    "average_temp": 15.13,
+    "acc_temp": 4771.56,
+    "fre_temp": 0,
+    "humi": 75.37,
+    "mean": 727.7
+  },
+  {
+    "ID": 67,
+    "urban": "丽水市",
+    "district": "青田县",
+    "average_temp": 16.25,
+    "acc_temp": 5214.88,
+    "fre_temp": 0,
+    "humi": 72.23,
+    "mean": 459.8
+  },
+  {
+    "ID": 68,
+    "urban": "丽水市",
+    "district": "缙云县",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 496.8
+  },
+  {
+    "ID": 69,
+    "urban": "丽水市",
+    "district": "遂昌县",
+    "average_temp": 15.49,
+    "acc_temp": 4944.59,
+    "fre_temp": 0,
+    "humi": 70.8,
+    "mean": 709.54
+  },
+  {
+    "ID": 70,
+    "urban": "丽水市",
+    "district": "龙泉市",
+    "average_temp": 14.61,
+    "acc_temp": 4630.85,
+    "fre_temp": 0,
+    "humi": 72.15,
+    "mean": 718.96
+  },
+  {
+    "ID": 71,
+    "urban": "丽水市",
+    "district": "莲都区",
+    "average_temp": 15.13,
+    "acc_temp": 4780.87,
+    "fre_temp": 0,
+    "humi": 75.9,
+    "mean": 389.2
+  },
+  {
+    "ID": 73,
+    "urban": "杭州市",
+    "district": "下城区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 15.63
+  },
+  {
+    "ID": 74,
+    "urban": "杭州市",
+    "district": "富阳区",
+    "average_temp": 17.1,
+    "acc_temp": 5578.67999999999,
+    "fre_temp": 0,
+    "humi": 68.84,
+    "mean": 193.35
+  },
+  {
+    "ID": 75,
+    "urban": "杭州市",
+    "district": "滨江区",
+    "average_temp": 17.85,
+    "acc_temp": 5876.13,
+    "fre_temp": 0,
+    "humi": 70.49,
+    "mean": 15.87
+  },
+  {
+    "ID": 76,
+    "urban": "杭州市",
+    "district": "建德市",
+    "average_temp": 16.65,
+    "acc_temp": 5410.8,
+    "fre_temp": 0,
+    "humi": 69.88,
+    "mean": 275.17
+  },
+  {
+    "ID": 77,
+    "urban": "杭州市",
+    "district": "拱墅区",
+    "average_temp": 17.94,
+    "acc_temp": 5908.34,
+    "fre_temp": 0,
+    "humi": 69.99,
+    "mean": 24.55
+  },
+  {
+    "ID": 78,
+    "urban": "杭州市",
+    "district": "江干区",
+    "average_temp": 17.11,
+    "acc_temp": 5573.89,
+    "fre_temp": 0,
+    "humi": 67.91,
+    "mean": 14.51
+  },
+  {
+    "ID": 79,
+    "urban": "杭州市",
+    "district": "西湖区",
+    "average_temp": 17.89,
+    "acc_temp": 5886.35,
+    "fre_temp": 0,
+    "humi": 70.26,
+    "mean": 56.65
+  },
+  {
+    "ID": 80,
+    "urban": "杭州市",
+    "district": "临安区",
+    "average_temp": 17.87,
+    "acc_temp": 5881.13,
+    "fre_temp": 0,
+    "humi": 70.22,
+    "mean": 415.95
+  },
+  {
+    "ID": 81,
+    "urban": "杭州市",
+    "district": "余杭区",
+    "average_temp": 15.45,
+    "acc_temp": 4960.77,
+    "fre_temp": 0,
+    "humi": 75.24,
+    "mean": 72.23
+  },
+  {
+    "ID": 82,
+    "urban": "杭州市",
+    "district": "上城区",
+    "average_temp": 17.39,
+    "acc_temp": 5692.66,
+    "fre_temp": 0,
+    "humi": 71.63,
+    "mean": 26.91
+  },
+  {
+    "ID": 83,
+    "urban": "杭州市",
+    "district": "淳安县",
+    "average_temp": 16.22,
+    "acc_temp": 5224.17,
+    "fre_temp": 0,
+    "humi": 73.65,
+    "mean": 360.9
+  },
+  {
+    "ID": 84,
+    "urban": "杭州市",
+    "district": "萧山区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 40.25
+  },
+  {
+    "ID": 85,
+    "urban": "杭州市",
+    "district": "桐庐县",
+    "average_temp": 16.25,
+    "acc_temp": 5254.76,
+    "fre_temp": 0,
+    "humi": 69.94,
+    "mean": 302.24
+  },
+  {
+    "ID": 87,
+    "urban": "绍兴市",
+    "district": "新昌县",
+    "average_temp": 16,
+    "acc_temp": 5146.1,
+    "fre_temp": 0,
+    "humi": 73.28,
+    "mean": 308.46
+  },
+  {
+    "ID": 88,
+    "urban": "绍兴市",
+    "district": "嵊州市",
+    "average_temp": 16.54,
+    "acc_temp": 5365.54,
+    "fre_temp": 0,
+    "humi": 71.37,
+    "mean": 241.98
+  },
+  {
+    "ID": 89,
+    "urban": "绍兴市",
+    "district": "诸暨市",
+    "average_temp": 17.28,
+    "acc_temp": 5656.35,
+    "fre_temp": 0,
+    "humi": 67.71,
+    "mean": 165.2
+  },
+  {
+    "ID": 90,
+    "urban": "绍兴市",
+    "district": "越城区",
+    "average_temp": 17.56,
+    "acc_temp": 5761.13,
+    "fre_temp": 0,
+    "humi": 70.44,
+    "mean": 37.06
+  },
+  {
+    "ID": 91,
+    "urban": "绍兴市",
+    "district": "柯桥区",
+    "average_temp": 17.33,
+    "acc_temp": 5668.39,
+    "fre_temp": 0,
+    "humi": 70.04,
+    "mean": 114.98
+  },
+  {
+    "ID": 92,
+    "urban": "绍兴市",
+    "district": "上虞区",
+    "average_temp": "-",
+    "acc_temp": "-",
+    "fre_temp": "-",
+    "humi": "-",
+    "mean": 67.22
+  },
+  {
+    "ID": 94,
+    "urban": "湖州市",
+    "district": "安吉县",
+    "average_temp": 15.32,
+    "acc_temp": 4938.69,
+    "fre_temp": 0,
+    "humi": 74.52,
+    "mean": 228.06
+  },
+  {
+    "ID": 95,
+    "urban": "湖州市",
+    "district": "长兴县",
+    "average_temp": 16.69,
+    "acc_temp": 5435.41,
+    "fre_temp": 0,
+    "humi": 73.71,
+    "mean": 79.87
+  },
+  {
+    "ID": 96,
+    "urban": "湖州市",
+    "district": "德清县",
+    "average_temp": 17.2,
+    "acc_temp": 5617.27,
+    "fre_temp": 0,
+    "humi": 72.41,
+    "mean": 74.88
+  },
+  {
+    "ID": 97,
+    "urban": "湖州市",
+    "district": "吴兴区",
+    "average_temp": 16.89,
+    "acc_temp": 5504.13,
+    "fre_temp": 0,
+    "humi": 73.04,
+    "mean": 48.26
+  },
+  {
+    "ID": 98,
+    "urban": "湖州市",
+    "district": "南浔区",
+    "average_temp": 17.47,
+    "acc_temp": 5721.63,
+    "fre_temp": 0,
+    "humi": 72.01,
+    "mean": 8.37
+  }
+]

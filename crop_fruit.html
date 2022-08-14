@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>茶耘</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .d {
+            border: 2px solid #ff0000;
+        }
+    </style>
+</head>
+<body class="bg-main" onload="initData();">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+<div class="container-fluid">
+    <!-- 顶部 -->
+    <div class="header bg-header row">
+        <!-- logo -->
+        <div class="header-logo col-md-4 row">
+            <img src="assets/gizmos/icon.png" class="img-rounded logo-top col-md-3">
+            <a href="index.html">
+                <p class="font-title col-md-9 col-sm-12" href="index.html">浙江果茶分析平台</p>
+            </a>
+        </div>
+        <!-- 导航栏 -->
+        <div class="col-md-8">
+            <nav class="navbar-top" style="margin-right: -30px">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="menu-item font-item pointer">
+                            作物产量
+                            <div class="sub-menu" style="left:-16px">
+                                <ul class="MenuItems">
+                                    <li class="MenuItems-item">
+                                        <a href="crop_tea.html">茶叶</a>
+                                    </li>
+                                    <li class="MenuItems-item">
+                                        <a href="crop_fruit.html">水果</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item font-item pointer">
+                            作物面积
+                            <div class="sub-menu">
+                                <ul class="MenuItems">
+                                    <li class="MenuItems-item">
+                                        <a href="area_tea.html">茶叶</a>
+                                    </li>
+                                    <li class="MenuItems-item">
+                                        <a href="area_fruit.html">水果</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item font-item pointer" id="moni">
+                            天气指标
+                        </li>
+                        <li class="menu-item font-item pointer" id="BP">
+                            产量预测
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- 图表 -->
+    <div class="col-md-12 bottom" style="margin-top: 5px">
+        <!-- 左 -->
+        <div class="col-md-4 v-box">
+            <div class="col-md-12 bottom-frame">
+                <div id="chart_zjcrop_pie" style="width:100%;height:42vh;"></div>
+            </div>
+            <div class="col-md-12 bottom-frame" style="margin-top: 5px">
+                <div id="chart_crop_pie" style="width:100%;height:42vh;"></div>
+            </div>
+        </div>
+        <!-- 中 -->
+        <div class="col-md-4">
+            <div class="btn-group" style="margin: auto">
+                <!--<button class="button btn-default font-button" type="button" id="btnFruit" onclick="OnButtonFru()">总和
+                </button>-->
+                <button class="button btn-default font-button" type="button" id="btnOrange" onclick="OnButtonOra()">柑橘
+                </button>
+                <button class="button btn-default font-button" type="button" id="btnPear" onclick="OnButtonPear()">梨
+                </button>
+                <button class="button btn-default font-button" type="button" id="btnPeach" onclick="OnButtonPeac()">桃
+                </button>
+                <button class="button btn-default font-button" type="button" id="btnWaxberry" onclick="OnButtonWax()">杨梅
+                </button>
+                <button class="button btn-default font-button" type="button" id="btnLoquat" onclick="OnButtonLoq()">枇杷
+                </button>
+                <button class="button btn-default font-button" type="button" id="btnPersimmon" onclick="OnButtonPer()">
+                    柿子
+                </button>
+                <button class="button btn-default font-button" type="button" id="btnGrape" onclick="OnButtonGra()">葡萄
+                </button>
+            </div>
+            <div class="bg-map">
+                <div id="EchartMap" style="height: 580px;width: 450px;
+                      border-radius: 5px;
+			          padding: 0px;
+			          margin: 0px;
+			          border-width: 0px;" ref="myEchart"></div>
+            </div>
+        </div>
+        <!-- 右 -->
+        <div class="col-md-4 v-box">
+            <div class="col-md-12 bottom-frame">
+                <div id="chart_zjcrop_line" style="width:100%;height:42vh;"></div>
+            </div>
+            <div class="col-md-12 bottom-frame" style="margin-top: 5px">
+                <div id="chart_crop_line" style="width:100%;height:42vh;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#moni').on('click', function () {
+        self.location = 'monitor.html';
+    })
+    $('#BP').on('click', function () {
+        self.location = 'BP.html';
+    })
+</script>
+<script type="text/javascript">
+    //json静态数据
+    var fruitdata = {
+        "orange": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+        "pear": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+        "peach": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+        "waxberry": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+        "loquat": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+        "persimmon": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+        "grape": {
+            "year_2018": [{}],
+            "year_2017": [{}],
+            "year_2016": [{}],
+            "year_2015": [{}],
+            "year_2014": [{}],
+            "year_2013": [{}],
+            "year_2012": [{}],
+            "year_2011": [{}],
+            "year_2010": [{}],
+            "year_2009": [{}],
+            "year_2008": [{}],
+            "year_2007": [{}],
+            "year_2006": [{}],
+            "year_2005": [{}],
+            "year_2004": [{}],
+            "year_2003": [{}],
+            "year_2002": [{}],
+            "year_2001": [{}]
+        },
+    };
+
+    //数据切换
+    var mode = 1;
+    var modename = "柑橘";
+
+    //地区名
+    var name = "西湖区";
+    //图表声明与绑定
+    var myChart_zjcrop = echarts.init(document.getElementById('chart_zjcrop_pie'));
+    var myChart_pie = echarts.init(document.getElementById('chart_crop_pie'));
+
+    var myChart_map = echarts.init(document.getElementById("EchartMap"));
+    echarts.connect([myChart_map, myChart_pie, myChart_zjcrop]);
+
+    var myChart_crop = echarts.init(document.getElementById('chart_zjcrop_line'));
+    var myChart_area = echarts.init(document.getElementById('chart_crop_line'));
+
+    //图表初始化
+
+    SetDistrictDara(name);
+    SetProvinceData();
+    SetClass(mode);
+
+    //鼠标移入connect图表时禁用其他图表tooltip
+    var MapDiv = document.getElementById("EchartMap");
+    MapDiv.onmouseover = function () {
+        myChart_map.setOption({tooltip: {show: true}});
+        myChart_pie.setOption({tooltip: {show: false}});
+        myChart_zjcrop.setOption({tooltip: {show: false}});
+    }
+    var TeaDiv = document.getElementById("chart_crop_pie");
+    TeaDiv.onmouseover = function () {
+        myChart_map.setOption({tooltip: {show: false}});
+        myChart_pie.setOption({tooltip: {show: true}});
+        myChart_zjcrop.setOption({tooltip: {show: false}});
+    }
+    var OrangeDiv = document.getElementById("chart_zjcrop_pie");
+    OrangeDiv.onmouseover = function () {
+        myChart_map.setOption({tooltip: {show: false}});
+        myChart_pie.setOption({tooltip: {show: false}});
+        myChart_zjcrop.setOption({tooltip: {show: true}});
+    }
+
+    //点击地图数据更新图表
+    myChart_map.on("click", function (result) {
+        var params = result.name + "";
+        if (params.indexOf("2") === -1) {
+            name = params;
+            SetDistrictDara(name);
+        }
+    })
+
+    //省静态数据加载
+    function initData() {
+        $.get("./json/crop_orange.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.orange['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+            initMap();
+        });
+        $.get("./json/crop_pear.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.pear['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+        });
+        $.get("./json/crop_peach.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.peach['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+        });
+        $.get("./json/crop_waxberry.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.waxberry['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+        });
+        $.get("./json/crop_loquat.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.loquat['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+        });
+        $.get("./json/crop_persimmon.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.persimmon['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+        });
+        $.get("./json/crop_grape.json", function (result) {
+            var len = result.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var year = 2001; year < 2019; year++) {
+                    if (result[i]['district'] !== result[i]['urban']) {
+                        fruitdata.grape['year_' + year].push({
+                            name: result[i]['district'],
+                            value: result[i]['year_' + year]
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function RemoveClass(mode) {
+        var btn;
+        switch (mode) {
+            case 0:
+            case 1:
+                btn = document.getElementById("btnOrange");
+                btn.classList.remove("button-active");
+                break;
+            case 2:
+                btn = document.getElementById("btnPear");
+                btn.classList.remove("button-active");
+                break;
+            case 3:
+                btn = document.getElementById("btnPeach");
+                btn.classList.remove("button-active");
+                break;
+            case 4:
+                btn = document.getElementById("btnWaxberry");
+                btn.classList.remove("button-active");
+                break;
+            case 5:
+                btn = document.getElementById("btnLoquat");
+                btn.classList.remove("button-active");
+                break;
+            case 6:
+                btn = document.getElementById("btnPersimmon");
+                btn.classList.remove("button-active");
+                break;
+            case 7:
+                btn = document.getElementById("btnGrape");
+                btn.classList.remove("button-active");
+                break;
+        }
+    }
+
+    function SetClass(mode) {
+        var btn;
+        switch (mode) {
+            case 0:
+            case 1:
+                btn = document.getElementById("btnOrange");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+            case 2:
+                btn = document.getElementById("btnPear");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+            case 3:
+                btn = document.getElementById("btnPeach");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+            case 4:
+                btn = document.getElementById("btnWaxberry");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+            case 5:
+                btn = document.getElementById("btnLoquat");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+            case 6:
+                btn = document.getElementById("btnPersimmon");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+            case 7:
+                btn = document.getElementById("btnGrape");
+                if (btn.className.indexOf("button-active") === -1) {
+                    btn.className += " button-active";
+                }
+                break;
+        }
+    }
+
+    //按钮数据更新
+    {
+        function OnButtonFru() {
+            RemoveClass(mode);
+            mode = 0;
+            modename = "水果";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonOra() {
+            RemoveClass(mode);
+            mode = 1;
+            modename = "柑橘";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonPear() {
+            RemoveClass(mode);
+            mode = 2;
+            modename = "梨";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonPeac() {
+            RemoveClass(mode);
+            mode = 3;
+            modename = "桃";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonWax() {
+            RemoveClass(mode);
+            mode = 4;
+            modename = "杨梅";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonLoq() {
+            RemoveClass(mode);
+            mode = 5;
+            modename = "枇杷";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonPer() {
+            RemoveClass(mode);
+            mode = 6;
+            modename = "柿子";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+
+        function OnButtonGra() {
+            RemoveClass(mode);
+            mode = 7;
+            modename = "葡萄";
+            SetClass(mode);
+            SetProvinceData();
+            initMap()
+            SetDistrictDara(name);
+        }
+    }
+
+    function SetProvinceData() {
+
+        var fruitProData = {
+            "year_2018": [],
+            "year_2017": [],
+            "year_2016": [],
+            "year_2015": [],
+            "year_2014": [],
+            "year_2013": [],
+            "year_2012": [],
+            "year_2011": [],
+            "year_2010": [],
+            "year_2009": [],
+            "year_2008": [],
+            "year_2007": [],
+            "year_2006": [],
+            "year_2005": [],
+            "year_2004": [],
+            "year_2003": [],
+            "year_2002": [],
+            "year_2001": []
+        }
+
+        var xData_crop = [];
+        var yData_crop = [];
+
+        myChart_zjcrop.setOption({
+            baseOption: {
+                timeline: {
+                    axisType: 'category',
+                    autoPlay: true,
+                    playInterval: 1000,
+                    data: ['2013', '2014', '2015', '2016', '2017', '2018']
+                },
+                title: {
+                    textStyle: {
+                        color: 'rgba(255, 255, 255, 255)'
+                    },
+                    left: 'center'
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {
+                            title: '保存',
+                            icon: 'image://assets/gizmos/download.png',
+                            connectedBackgroundColor:'rgba(0,0,0,0)',
+                            backgroundColor:'rgba(0,0,0,0)',
+                            emphasis:{
+                                iconStyle: {
+                                    textFill:'#fff'}
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: modename + '产量',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [],
+                    label: {
+                        fontSize: 13,
+                        color: '#fff',
+                    }
+                }],
+            },
+        });
+        myChart_crop.setOption({
+            textStyle: {
+                color: 'rgba(255, 255, 255, 255)'
+            },
+            title: {
+                textStyle: {
+                    color: 'rgba(255, 255, 255, 255)'
+                }
+            },
+            grid: {
+                left: '0%',
+                right: '10%',
+                top: '15%',
+                bottom: '15%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        color: '#fff',
+                    },
+                    label: {
+                        backgroundColor: '#6a7985',
+                        show: true,
+                    },
+                    snap: true,
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {
+                        title: '保存',
+                        icon: 'image://assets/gizmos/download.png',
+                        connectedBackgroundColor:'rgba(0,0,0,0)',
+                        backgroundColor:'rgba(0,0,0,0)',
+                        emphasis:{
+                            iconStyle: {
+                                textFill:'#fff'}
+                        }
+                    }
+                },
+            },
+            xAxis: {
+                name: '年份',
+                data: [],
+                axisLine: {
+                    lineStyle: {
+                        color: '#fff',
+                        width: 1,
+                    }
+                },
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        show: true,
+                        formatter: function (value) {
+                            if (value === 0) {
+                                return 0
+                            } else {
+                                value = value / 1000;
+                                return value + '万吨';
+                            }
+                        }
+                    }
+                }
+            ],
+            dataZoom: [{
+                type: 'slider',
+                start: 0,
+                end: 100,
+                top: '85%',
+                bottom: '5%'
+            }],
+            series: [{
+                type: 'line',
+                smooth: true,
+                lineStyle: {
+                    color: 'rgba(7, 110, 255)',
+                    width: 3
+                },
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(128, 255, 165)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(1, 191, 236)'
+                    }])
+                },
+            }]
+        });
+        switch (mode) {
+            case 1:
+                $.get("./json/crop_orange.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+            case 2:
+                $.get("./json/crop_pear.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+            case 3:
+                $.get("./json/crop_peach.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+            case 4:
+                $.get("./json/crop_waxberry.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+            case 5:
+                $.get("./json/crop_loquat.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+            case 6:
+                $.get("./json/crop_peach.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+            case 7:
+                $.get("./json/crop_waxberry.json").done(function (result) {
+                    var len = result.length;
+                    //左上 省产量饼图
+                    for (var i = 0; i < len - 1; i++) {
+                        for (var year = 2001; year < 2019; year++) {
+                            if (result[i]['urban'] === result[i]['district']) {
+                                fruitProData['year_' + year].push({
+                                    name: result[i]['district'],
+                                    value: result[i]['year_' + year]
+                                });
+                            }
+                        }
+                    }
+                    myChart_zjcrop.setOption({
+                        options: [
+                            {
+                                title: {text: '2013年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年浙江' + modename + '产量占比'},
+                                series: [
+                                    {data: fruitProData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+
+                    //右上 省产量折线图
+                    for (year = 2001; year < 2019; year++) {
+                        yData_crop.push(result[len - 1]['year_' + year]);
+                        xData_crop.push(year);
+                    }
+                    myChart_crop.setOption({
+                        title: {
+                            text: '浙江省' + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+                });
+                break;
+        }
+
+    }
+
+    //地图
+    function initMap() {
+        $.get("./json/zj.json", function (result) {
+            echarts.registerMap("zj", result);
+            var option;
+            option = {
+                baseOption: {
+                    timeline: {
+                        axisType: 'category',
+                        autoPlay: true,
+                        playInterval: 1000,
+                        data: ['2013', '2014', '2015', '2016', '2017', '2018']
+                    },
+                    title: {
+                        show: true,
+                        text: '浙江省地图信息',
+                        left: 'center',
+                        textStyle: {
+                            color: 'rgba(255, 255, 255, 255)'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {
+                                title: '保存',
+                                icon: 'image://assets/gizmos/download.png',
+                                connectedBackgroundColor:'rgba(0,0,0,0)',
+                                backgroundColor:'rgba(0,0,0,0)',
+                                emphasis:{
+                                    iconStyle: {
+                                        textFill:'#fff'}
+                                }
+                            }
+                        },
+                    },
+                    visualMap: {
+                        text: ['High', 'Low'],
+                        realtime: false,
+                        calculable: true,
+                        inRange: {
+                            color: ['#00f500', '#5ef700', '#94f700', '#c6f600', '#f5f500', '#fcc200', '#fc8b00', '#fb5700', '#f40000']
+                        },
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    },
+                    series: [{
+                        name: '数量',
+                        type: 'map',
+                        mapType: "zj",
+                        selectedMode: 'single',
+                        aspectScale: 1,
+                        nameProperty: 'district',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true
+                                },
+                                borderWidth: 1, //省份的边框宽度
+                                borderColor: '#7E4A32', //省份的边框颜色
+                                color: '#6fec6b', //地图背景颜色
+                                areaColor: "#DCCFF8",
+                                areaStyle: {
+                                    color: '#f60'
+                                } //设置地图颜色
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        roam: true,
+                        zoom: 1.2,
+                        label: {
+                            normal: {
+                                show: true,
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        }
+                    },
+                    ]
+                }
+            };
+            myChart_map.setOption(option);
+            switch (mode) {
+                case 1:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 50000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.orange.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.orange.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.orange.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.orange.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.orange.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.orange.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+                case 2:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 7000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+                case 3:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 10000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+                case 4:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 12000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.waxberry.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.waxberry.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.waxberry.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.waxberry.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.waxberry.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.waxberry.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+                case 5:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 1000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.loquat.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.loquat.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.loquat.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.loquat.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.loquat.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.loquat.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+                case 6:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 15000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.pear.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+                case 7:
+                    option = {
+                        baseOption: {
+                            visualMap: {
+                                min: 0,
+                                max: 12000,
+                            }
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年城镇' + modename + '产量'},
+                                series: [
+                                    {data: fruitdata.peach.year_2018}
+                                ]
+                            }
+                        ]
+                    };
+                    break;
+            }
+            myChart_map.setOption(option);
+            // })
+        })
+    }
+
+    function SetDistrictDara(name) {
+        var fruitDisData = {
+            "year_2018": [],
+            "year_2017": [],
+            "year_2016": [],
+            "year_2015": [],
+            "year_2014": [],
+            "year_2013": [],
+            "year_2012": [],
+            "year_2011": [],
+            "year_2010": [],
+            "year_2009": [],
+            "year_2008": [],
+            "year_2007": [],
+            "year_2006": [],
+            "year_2005": [],
+            "year_2004": [],
+            "year_2003": [],
+            "year_2002": [],
+            "year_2001": []
+        }
+
+        var xData_crop = [];
+        var yData_crop = [];
+
+        var urban = '';
+
+        myChart_area.setOption({
+            textStyle: {
+                color: 'rgba(255, 255, 255, 255)'
+            },
+            title: {
+                textStyle: {
+                    color: 'rgba(255, 255, 255, 255)'
+                }
+            },
+            grid: {
+                left: '0%',
+                right: '10%',
+                top: '15%',
+                bottom: '15%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        color: '#fff',
+                    },
+                    label: {
+                        backgroundColor: '#6a7985',
+                        show: true,
+                    },
+                    snap: true,
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {
+                        title: '保存',
+                        icon: 'image://assets/gizmos/download.png',
+                        connectedBackgroundColor:'rgba(0,0,0,0)',
+                        backgroundColor:'rgba(0,0,0,0)',
+                        emphasis:{
+                            iconStyle: {
+                                textFill:'#fff'}
+                        }
+                    }
+                },
+            },
+            xAxis: {
+                data: [],
+                name: '年份',
+                axisLine: {
+                    lineStyle: {
+                        color: '#fff',
+                        width: 1,
+                    }
+                },
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        show: true,
+                        formatter: function (value) {
+                            if (value === 0) {
+                                return 0
+                            } else {
+                                value = value / 1000;
+                                return value + '万吨';
+                            }
+                        }
+                    }
+                }
+            ],
+            dataZoom: [{
+                type: 'slider',
+                start: 0,
+                end: 100,
+                top: '85%',
+                bottom: '5%'
+            }],
+            series: [{
+                type: 'line',
+                smooth: true,
+                lineStyle: {
+                    color: 'rgba(7, 110, 255)',
+                    width: 3
+                },
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0.2,
+                        color: 'rgba(128, 255, 165)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(1, 191, 236)'
+                    }])
+                },
+            }]
+        });
+        myChart_pie.setOption({
+            baseOption: {
+                timeline: {
+                    axisType: 'category',
+                    autoPlay: true,
+                    playInterval: 1000,
+                    data: ['2013', '2014', '2015', '2016', '2017', '2018']
+                },
+                title: {
+                    textStyle: {
+                        color: 'rgba(255, 255, 255, 255)'
+                    },
+                    left: 'center'
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {
+                            title: '保存',
+                            icon: 'image://assets/gizmos/download.png',
+                            connectedBackgroundColor:'rgba(0,0,0,0)',
+                            backgroundColor:'rgba(0,0,0,0)',
+                            emphasis:{
+                                iconStyle: {
+                                    textFill:'#fff'}
+                            }
+                        }
+                    },
+                },
+                series: [{
+                    type: 'pie',
+                    radius: '50%',
+                    data: [],
+                    label: {
+                        fontSize: 13,
+                        color: '#fff',
+                    }
+                }],
+            }
+        });
+        switch (mode) {
+            case 1:
+                $.get("./json/crop_orange.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+            case 2:
+                $.get("./json/crop_pear.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+            case 3:
+                $.get("./json/crop_peach.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+            case 4:
+                $.get("./json/crop_waxberry.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+            case 5:
+                $.get("./json/crop_loquat.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+            case 6:
+                $.get("./json/crop_persimmon.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+            case 7:
+                $.get("./json/crop_grape.json").done(function (result) {
+                    var len = result.length;
+
+                    //右下 市产量折线图
+                    for (var i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            for (var j = 2001; j < 2019; j++) {
+                                yData_crop.push(result[i]['year_' + j]);
+                                xData_crop.push(j);
+                            }
+                            break;
+                        }
+                    }
+                    myChart_area.setOption({
+                        title: {
+                            text: name + modename + '产量变化图',
+                        },
+                        xAxis: {
+                            data: xData_crop,
+                        },
+                        series: [{
+                            name: modename + '产量',
+                            data: yData_crop,
+                        }]
+                    });
+
+                    //左下 市产量饼图
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['district'] === name) {
+                            urban = result[i]['urban'];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < len; i++) {
+                        if (result[i]['urban'] === urban && result[i]['urban'] !== result[i]['district']) {
+                            for (var year = 2001; year < 2019; year++) {
+                                fruitDisData['year_' + year].push({
+                                    value: result[i]['year_' + year],
+                                    name: result[i]['district']
+                                })
+                            }
+                        }
+                    }
+                    myChart_pie.setOption({
+                        baseOption: {
+                            title: {
+                                text: urban + '各地区' + modename + '产量占比',
+                            },
+                            series: [{
+                                name: modename + '产量',
+                            }],
+                        },
+                        options: [
+                            {
+                                title: {text: '2013年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2013}
+                                ]
+                            },
+                            {
+                                title: {text: '2014年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2014}
+                                ]
+                            },
+                            {
+                                title: {text: '2015年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2015}
+                                ]
+                            },
+                            {
+                                title: {text: '2016年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2016}
+                                ]
+                            },
+                            {
+                                title: {text: '2017年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2017}
+                                ]
+                            },
+                            {
+                                title: {text: '2018年' + urban + modename + '产量占比'},
+                                series: [
+                                    {data: fruitDisData.year_2018}
+                                ]
+                            }
+                        ]
+                    });
+                });
+                break;
+        }
+
+    }
+</script>
+
+</body>
+</html>
